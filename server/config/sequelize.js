@@ -1,11 +1,11 @@
-import { Sequelize } from 'sequelize';
+const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize('test', 'root', '00000', {
-	host: '8.134.158.197',
+	host: '8.134.153.133',
 	dialect: 'mysql',
 });
 
-(async function test() {
+(async function () {
 	try {
 		await sequelize.authenticate();
 		console.log('Connection has been established successfully.');
@@ -13,3 +13,5 @@ const sequelize = new Sequelize('test', 'root', '00000', {
 		console.error('Unable to connect to the database:', error);
 	}
 })();
+
+module.exports = sequelize;
