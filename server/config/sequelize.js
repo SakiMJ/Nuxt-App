@@ -1,9 +1,13 @@
 const { Sequelize } = require('sequelize');
 
+const initModels = require('../models/init-models');
+
 const sequelize = new Sequelize('test', 'root', '00000', {
-	host: '8.134.153.133',
+	host: '8.134.48.201',
 	dialect: 'mysql',
 });
+
+const models = initModels(sequelize);
 
 (async function () {
 	try {
@@ -14,4 +18,4 @@ const sequelize = new Sequelize('test', 'root', '00000', {
 	}
 })();
 
-module.exports = sequelize;
+module.exports = { ...models, sequelize };
