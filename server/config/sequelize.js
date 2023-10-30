@@ -9,6 +9,15 @@ const sequelize = new Sequelize('test', 'root', '00000', {
 
 const models = initModels(sequelize);
 
+models.Student.hasOne(models.Desk, {
+	foreignKey: 'student_id',
+	as: 'deskDetail',
+});
+models.Desk.belongsTo(models.Student, {
+	foreignKey: 'student_id',
+	as: 'studentDetail',
+});
+
 (async function () {
 	try {
 		await sequelize.authenticate();

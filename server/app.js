@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { Account } = require('./config/sequelize.js');
+const { Account, Desk, Student } = require('./config/sequelize.js');
 const { Op } = require('sequelize');
 const app = express();
 
@@ -22,6 +22,26 @@ app.get('/find', async (req, res) => {
 	const result = await Account.findAll({
 		where: {
 			[Op.or]: [{ username: '小明' }, { age: 20 }],
+		},
+	});
+	res.send(result);
+});
+
+app.get('/desk', async (req, res) => {
+	const result = await Desk.findAll({
+		include: {
+			model: Student,
+			as: 'studentDetail',
+		},
+	});
+	res.send(result);
+});
+
+app.get('/student', async (req, res) => {
+	const result = await Student.findAll({
+		include: {
+			model: Desk,
+			as: 'deskDetail',
 		},
 	});
 	res.send(result);
