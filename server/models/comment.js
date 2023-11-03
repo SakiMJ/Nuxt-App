@@ -1,22 +1,22 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Student', {
+  return sequelize.define('Comment', {
     id: {
       type: DataTypes.INTEGER,
       allowNull: true,
       primaryKey: true
     },
-    username: {
+    content: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    class_id: {
+    order_num: {
       type: DataTypes.INTEGER,
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'student',
+    tableName: 'comment',
     timestamps: false
   });
 };

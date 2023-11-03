@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 const initModels = require('../models/init-models');
 
 const sequelize = new Sequelize('test', 'root', '00000', {
-	host: '8.134.48.201',
+	host: '8.134.74.217',
 	dialect: 'mysql',
 });
 
@@ -16,6 +16,15 @@ models.Student.hasOne(models.Desk, {
 models.Desk.belongsTo(models.Student, {
 	foreignKey: 'student_id',
 	as: 'studentDetail',
+});
+
+models.Class.hasMany(models.Student, {
+	foreignKey: 'class_id',
+	as: 'studentList',
+});
+models.Student.belongsTo(models.Class, {
+	foreignKey: 'class_id',
+	as: 'classDetail',
 });
 
 (async function () {
